@@ -54,6 +54,41 @@
     cursor: none !important;
   }
 
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.5rem 2rem;
+    background: var(--dark);
+    border-top: 1px solid rgba(176,141,76,0.15);
+    border-bottom: 1px solid rgba(176,141,76,0.15);
+  }
+  .stats-bar .stat {
+    text-align: center;
+  }
+  .stats-bar .stat-value {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .stats-bar .stat-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,249,246,0.4);
+    margin-top: 0.35rem;
+  }
+  @media (max-width: 640px) {
+    .stats-bar { gap: 1.5rem; padding: 2rem 1.25rem; flex-wrap: wrap; }
+    .stats-bar .stat { flex: 0 0 calc(50% - 1rem); }
+    .stats-bar .stat-value { font-size: 1.3rem; }
+  }
+
   /* ===== CUSTOM CURSOR ===== */
   .cursor {
     position: fixed;
@@ -220,6 +255,8 @@
 
   .mobile-menu-btn {
     display: none;
+    min-width: 44px;
+    min-height: 44px;
     background: none;
     border: none;
     width: 28px;
@@ -579,7 +616,7 @@
     padding: 2.5rem 2rem;
     border: 1px solid var(--border);
     border-radius: 16px;
-    transition: all 0.5s var(--ease-out);
+    transition: all 0.25s ease-out;
     position: relative;
     overflow: hidden;
     background: white;
@@ -786,6 +823,12 @@
   .t-green { color: #4ade80; }
   .t-dim { color: rgba(250,249,246,0.14); }
 
+
+  @media (max-width: 640px) {
+    .terminal-body { font-size: 0.62rem; overflow-x: auto; }
+    .ai-terminal { max-width: 100%; overflow: hidden; }
+  }
+
   .t-cursor {
     display: inline-block;
     width: 7px;
@@ -843,6 +886,7 @@
   /* ===== GUARANTEE ===== */
   .guarantee {
     border-top: 3px solid var(--accent);
+    background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
     padding: 8rem 3rem;
   }
 
@@ -994,9 +1038,11 @@
   }
 
   .global-flag {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    line-height: 1;
     background: var(--accent-soft);
     color: var(--accent);
     font-family: var(--serif);
@@ -1270,7 +1316,7 @@
   }
 
   /* Approach number glow pulse */
-  .approach-num { position: relative; z-index: 0; font-weight: 700; letter-spacing: -0.04em; }
+  .approach-num { position: relative; z-index: 0; font-family: var(--mono); font-weight: 500; letter-spacing: 0.02em; opacity: 0.5; }
   .approach-card h3, .approach-card p { position: relative; z-index: 1; }
   .approach-card:hover .approach-num {
     color: rgba(176,141,76,0.35);
@@ -1306,7 +1352,7 @@
   .service-card:hover::before { left: 100%; }
 
   /* Global card hover rotate */
-  .global-card { transition: all 0.5s var(--ease-out); perspective: 600px; }
+  .global-card { transition: all 0.25s ease-out; perspective: 600px; }
   .global-card:hover {
     transform: translateY(-6px) rotateX(3deg);
   }
@@ -1368,11 +1414,13 @@
     }
     .nav-links.open { display: flex; }
     .nav-links a { font-size: 1.1rem; }
-    .mobile-menu-btn { display: block; }
+    .mobile-menu-btn { display: block; min-width: 44px; min-height: 44px; }
+    .nav-links a { min-height: 44px; display: flex; align-items: center; }
     .hero { padding: 7rem 2.5rem 4rem 1.5rem; min-height: 90vh; }
     .hero-ctas { flex-direction: column; align-items: center; }
     .guarantee {
-    border-top: 3px solid var(--accent); padding: 5rem 1.5rem; }
+    border-top: 3px solid var(--accent);
+    background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%); padding: 5rem 1.5rem; }
     .final-cta { padding: 6rem 1.5rem; }
     footer { padding: 2rem 1.5rem; }
     .founder-creds { grid-template-columns: 1fr; }
@@ -1406,7 +1454,7 @@
 
   @media (max-width: 420px) {
     .hero h1 { font-size: 1.5rem; }
-    .shimmer-text { padding-right: 0.5em; font-style: normal; letter-spacing: 0.01em; }
+    .hero h1 em.shimmer-text { padding-right: 0.5em; font-style: normal; letter-spacing: 0.01em; }
   }
   @media (max-width: 375px) {
     .hero h1 { font-size: 1.35rem; }
@@ -1446,9 +1494,9 @@
   <div class="hero-content">
     <p class="hero-eyebrow">London-founded · globally delivered</p>
     <h1>The complete path to<br><em class="shimmer-text">medicine and dentistry</em></h1>
-    <p class="hero-desc">We plan and deliver every stage of the journey to medical or dental school, wherever you are in the world.</p>
+    <p class="hero-desc">From UCAT preparation to interview coaching, your child gets a dedicated team, a structured plan, and expert guidance at every stage of the admissions journey.</p>
     <div class="hero-ctas">
-      <a href="#start" class="btn btn-dark magnetic">Get started <span class="btn-arrow">→</span></a>
+      <a href="#start" class="btn btn-dark magnetic">Start your journey <span class="btn-arrow">→</span></a>
       <a href="#approach" class="btn btn-ghost magnetic">Our approach</a>
     </div>
   </div>
@@ -1457,6 +1505,27 @@
     <div class="hero-scroll-line"></div>
   </div>
 </section>
+
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-value">11+</div>
+    <div class="stat-label">Offers across 4 countries</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">3,000+</div>
+    <div class="stat-label">Hours tutored</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">Top 5%</div>
+    <div class="stat-label">UCAT percentile</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">8</div>
+    <div class="stat-label">Countries served</div>
+  </div>
+</div>
 
 <!-- MARQUEE -->
 <div class="marquee-section">
@@ -1736,42 +1805,42 @@
     <p class="section-body reveal reveal-d2">We work with students applying from and to medical and dental schools across the world. Whether you're in London applying locally, in Singapore targeting the UK, or in the UAE deciding between three continents, we've guided students through every combination.</p>
     <div class="global-grid" style="grid-template-columns: repeat(4, 1fr);">
       <div class="global-card reveal">
-        <div class="global-flag">UK</div>
+        <div class="global-flag">🇬🇧</div>
         <h4>United Kingdom</h4>
         <p>UCAS, UCAT, MMI, Panel Interviews</p>
       </div>
       <div class="global-card reveal reveal-d1">
-        <div class="global-flag">SG</div>
+        <div class="global-flag">🇸🇬</div>
         <h4>Singapore</h4>
         <p>NUS, LKCMedicine (NTU), Duke-NUS</p>
       </div>
       <div class="global-card reveal reveal-d2">
-        <div class="global-flag">HK</div>
+        <div class="global-flag">🇭🇰</div>
         <h4>Hong Kong</h4>
         <p>HKU, CUHK, JUPAS and Non-JUPAS</p>
       </div>
       <div class="global-card reveal reveal-d3">
-        <div class="global-flag">US</div>
+        <div class="global-flag">🇺🇸</div>
         <h4>United States</h4>
         <p>MCAT, AMCAS, pre-med guidance</p>
       </div>
       <div class="global-card reveal">
-        <div class="global-flag">AU</div>
+        <div class="global-flag">🇦🇺</div>
         <h4>Australia</h4>
         <p>UCAT ANZ, GAMSAT, interviews</p>
       </div>
       <div class="global-card reveal reveal-d1">
-        <div class="global-flag">AE</div>
+        <div class="global-flag">🇦🇪</div>
         <h4>UAE & Middle East</h4>
         <p>MBRU, Khalifa, international pathways</p>
       </div>
       <div class="global-card reveal reveal-d2">
-        <div class="global-flag">IN</div>
+        <div class="global-flag">🇮🇳</div>
         <h4>India</h4>
         <p>NEET, UK/SG/AU applications abroad</p>
       </div>
       <div class="global-card reveal reveal-d3">
-        <div class="global-flag">EU</div>
+        <div class="global-flag">🇪🇺</div>
         <h4>Europe</h4>
         <p>English-taught programmes, IMAT</p>
       </div>
@@ -1786,7 +1855,7 @@
     <div class="section-heading reveal reveal-d1">Who we work best with</div>
     <p class="section-body reveal reveal-d2">We invest seriously in every student. To make that work, we want to make sure it's the right fit from the start.</p>
     <div class="eligibility-grid">
-      <div class="elig-box yes reveal">
+      <div class="elig-box yes reveal" style="background:rgba(61,163,110,0.04); border:1px solid rgba(61,163,110,0.15); border-radius:14px; padding:2.5rem;">
         <h3><span style="color:#3da36e;">●</span> Strong Candidates</h3>
         <ul class="elig-list">
           <li>Serious about pursuing medicine or dentistry as a career</li>
@@ -1796,7 +1865,7 @@
           <li>Based anywhere in the world</li>
         </ul>
       </div>
-      <div class="elig-box no reveal reveal-d1">
+      <div class="elig-box no reveal reveal-d1" style="background:rgba(138,133,120,0.04); border:1px solid rgba(138,133,120,0.12); border-radius:14px; padding:2.5rem;">
         <h3><span style="color:var(--muted);">●</span> Probably Not the Right Fit</h3>
         <ul class="elig-list">
           <li>Unable to commit to regular weekly sessions</li>
@@ -1848,7 +1917,7 @@
   <div class="container reveal">
     <h2>Ready to begin your<br>path to <em>medicine or dentistry</em>?</h2>
     <p>Tell us where you are and where you want to go. We'll be in touch within 48 hours.</p>
-    <a href="https://forms.gle/BvHQwhYfwiFyeXTD7" target="_blank" class="btn btn-dark magnetic" style="font-size:0.95rem; padding:1.1rem 2.75rem;">Get started <span class="btn-arrow">→</span></a>
+    <a href="https://forms.gle/BvHQwhYfwiFyeXTD7" target="_blank" class="btn btn-dark magnetic" style="font-size:0.95rem; padding:1.1rem 2.75rem;">Book a free consultation <span class="btn-arrow">→</span></a>
     <p class="footnote">No obligation. No pressure. Just an honest conversation.</p>
   </div>
 </section>
@@ -1886,6 +1955,41 @@
 </footer>
 
 <script>
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.5rem 2rem;
+    background: var(--dark);
+    border-top: 1px solid rgba(176,141,76,0.15);
+    border-bottom: 1px solid rgba(176,141,76,0.15);
+  }
+  .stats-bar .stat {
+    text-align: center;
+  }
+  .stats-bar .stat-value {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .stats-bar .stat-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,249,246,0.4);
+    margin-top: 0.35rem;
+  }
+  @media (max-width: 640px) {
+    .stats-bar { gap: 1.5rem; padding: 2rem 1.25rem; flex-wrap: wrap; }
+    .stats-bar .stat { flex: 0 0 calc(50% - 1rem); }
+    .stats-bar .stat-value { font-size: 1.3rem; }
+  }
+
   /* ===== CUSTOM CURSOR ===== */
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
