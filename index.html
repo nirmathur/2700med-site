@@ -296,6 +296,7 @@
   }
 
   .hero-content {
+    overflow: visible;
     position: relative;
     z-index: 1;
     max-width: 800px;
@@ -321,6 +322,7 @@
     letter-spacing: -0.025em;
     color: var(--ink);
     margin-bottom: 2rem;
+    overflow: visible;
     opacity: 0;
     animation: fadeUp 1.2s var(--ease-out) 0.4s forwards;
   }
@@ -1258,7 +1260,8 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: shimmer 4s linear infinite;
-    padding-right: 0.2em;
+    padding-right: 0.5em;
+    padding-left: 0.05em;
     display: inline-block;
     overflow: visible;
   }
