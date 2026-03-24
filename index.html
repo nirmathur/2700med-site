@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a1a1a'/><text x='50%25' y='54%25' font-family='Georgia,serif' font-size='13' font-weight='700' fill='%23b08d4c' text-anchor='middle' dominant-baseline='middle'>27</text></svg>">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="End-to-end medical and dental school admissions guidance. Expert tutoring, UCAT prep, personal statements, interview coaching. Helping the next generation get in, worldwide.">
 <meta property="og:title" content="2700 | Medical Admissions">
 <meta property="og:description" content="End-to-end medical and dental school admissions guidance. Expert tutoring, worldwide.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://2700med.com">
+<meta property="og:image" content="https://2700med.com/og-image.png">
 <title>2700 | Medical &amp; Dental Admissions</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -434,6 +437,8 @@
 
   /* ===== MARQUEE ===== */
   .marquee-section {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     padding: 1.75rem 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -442,7 +447,7 @@
 
   .marquee-track {
     display: flex;
-    animation: marquee 35s linear infinite;
+    animation: marquee 55s linear infinite;
     width: max-content;
   }
 
@@ -598,6 +603,15 @@
   .service-card:hover::after { height: 40%; }
 
   .service-icon {
+    background: rgba(176,141,76,0.08);
+    border-radius: 10px;
+    padding: 0.4em 0.5em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2em;
+    min-height: 2em;
     width: 40px;
     height: 40px;
     margin-bottom: 1.5rem;
@@ -827,10 +841,12 @@
 
   /* ===== GUARANTEE ===== */
   .guarantee {
+    border-top: 3px solid var(--accent);
     padding: 8rem 3rem;
   }
 
   .guarantee-inner {
+    border: 1.5px solid rgba(176,141,76,0.4);
     max-width: 660px;
     margin: 0 auto;
     text-align: center;
@@ -1050,7 +1066,8 @@
     top: 0.6rem;
   }
 
-  .elig-box.yes .elig-list li::before { content: '✓'; color: #3da36e; }
+  .elig-box.yes .elig-list li::before { content: '✓'; color: #3da36e; font-weight: 700; }
+  .elig-box.no .elig-list li { color: var(--muted); }
   .elig-box.no .elig-list li::before { content: '—'; color: var(--muted); }
 
   /* ===== FAQ ===== */
@@ -1079,6 +1096,7 @@
   .faq-q:hover { color: var(--accent); }
 
   .faq-arrow {
+    transition: transform 0.25s var(--ease-out), color 0.2s;
     width: 24px; height: 24px;
     border-radius: 50%;
     border: 1px solid var(--border);
@@ -1092,7 +1110,7 @@
   }
 
   .faq-item.open .faq-arrow {
-    transform: rotate(45deg);
+    transform: rotate(135deg);
     border-color: var(--accent);
     color: var(--accent);
   }
@@ -1250,7 +1268,7 @@
   }
 
   /* Approach number glow pulse */
-  .approach-num { position: relative; z-index: 0; }
+  .approach-num { position: relative; z-index: 0; font-weight: 700; letter-spacing: -0.04em; }
   .approach-card h3, .approach-card p { position: relative; z-index: 1; }
   .approach-card:hover .approach-num {
     color: rgba(176,141,76,0.35);
@@ -1351,18 +1369,20 @@
     .mobile-menu-btn { display: block; }
     .hero { padding: 7rem 1.5rem 4rem; min-height: 90vh; }
     .hero-ctas { flex-direction: column; align-items: center; }
-    .guarantee { padding: 5rem 1.5rem; }
+    .guarantee {
+    border-top: 3px solid var(--accent); padding: 5rem 1.5rem; }
     .final-cta { padding: 6rem 1.5rem; }
     footer { padding: 2rem 1.5rem; }
     .founder-creds { grid-template-columns: 1fr; }
-    .global-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+    .global-grid { grid-template-columns: 1fr 1fr; max-width: 380px; margin: 0 auto; }
     .tutor-visual { grid-template-columns: 1fr; }
     .tutor-stat-card.span-2 { grid-column: span 1; }
   }
 
   @media (max-width: 480px) {
     .approach-num { font-size: 5rem; }
-    .guarantee-inner { padding: 3rem 1.5rem; }
+    .guarantee-inner {
+    border: 1.5px solid rgba(176,141,76,0.4); padding: 3rem 1.5rem; }
     .final-cta h2 { font-size: 2rem; }
     .services-grid { max-width: 100%; }
     .tutor-stats { grid-template-columns: 1fr 1fr; }
@@ -1405,7 +1425,7 @@
   <div class="hero-content">
     <p class="hero-eyebrow">London-founded · globally delivered</p>
     <h1>The complete path<br>to <em class="shimmer-text">medicine and dentistry</em></h1>
-    <p class="hero-desc">End-to-end guidance from early foundations through offer day, wherever you are in the world. We build the grades, the application, and the confidence that gets you in. Medical and dental students helping the next generation get in.</p>
+    <p class="hero-desc">We plan and deliver every stage of the journey to medical or dental school, wherever you are in the world.</p>
     <div class="hero-ctas">
       <a href="#start" class="btn btn-dark magnetic">Get started <span class="btn-arrow">→</span></a>
       <a href="#approach" class="btn btn-ghost magnetic">Our approach</a>
@@ -1505,7 +1525,7 @@
         <p>Full mock MMI circuits, panel interview practice, ethics scenarios, communication coaching, and role play exercises with trained medical students.</p>
       </div>
       <div class="service-card reveal reveal-d5">
-        <span class="service-icon">✦</span>
+        <span class="service-icon">C</span>
         <h3>UCAS Strategy</h3>
         <p>Data-informed school selection based on your UCAT score, predicted grades, and individual profile. We help you make the most of your UCAS choices for medicine and dentistry, and any international applications.</p>
       </div>
@@ -1829,6 +1849,11 @@
     <a href="#tutors">Tutors</a>
     <a href="#faq">FAQ</a>
     <a href="https://forms.gle/BvHQwhYfwiFyeXTD7" target="_blank">Contact</a>
+  </div>
+  <div style="margin-bottom:1rem; display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;">
+    <a href="mailto:hello@2700med.com" style="color:rgba(250,249,246,0.45); font-size:0.82rem; text-decoration:none; letter-spacing:0.04em;">hello@2700med.com</a>
+    <span style="color:rgba(250,249,246,0.2);">·</span>
+    <span style="color:rgba(250,249,246,0.45); font-size:0.82rem; letter-spacing:0.04em;">London-founded · Globally delivered</span>
   </div>
   <p class="footer-copy">© 2026 2700 Medical Admissions. Not affiliated with any medical school, dental school, or admissions body.</p>
 </footer>
