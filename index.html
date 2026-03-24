@@ -1405,8 +1405,11 @@
   .hero-scroll { position: relative; z-index: 1; }
 
   @media (max-width: 420px) {
-    .hero h1 { font-size: 1.75rem; }
-    .shimmer-text { padding-right: 0.6em; }
+    .hero h1 { font-size: 1.5rem; }
+    .shimmer-text { padding-right: 0.5em; font-style: normal; letter-spacing: 0.01em; }
+  }
+  @media (max-width: 375px) {
+    .hero h1 { font-size: 1.35rem; }
   }
 </style>
 </head>
@@ -1438,7 +1441,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-clip" id="heroClip"><div class="hero-bg-text" id="heroBg">27</div></div>
+  <div class="hero-clip" id="heroClip"><div class="hero-bg-text" id="heroBg">0</div></div>
   <!-- Particles injected by JS -->
   <div class="hero-content">
     <p class="hero-eyebrow">London-founded · globally delivered</p>
@@ -2063,6 +2066,25 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  // Animate hero bg number counting up to 2700
+  (function() {
+    const el = document.getElementById('heroBg');
+    if (!el) return;
+    const target = 2700;
+    const duration = 2200;
+    const start = performance.now();
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      el.textContent = Math.round(easeOut(progress) * target);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    // Start after a short delay so page has loaded
+    setTimeout(() => requestAnimationFrame(step), 400);
+  })();
+
 </script>
 </body>
 </html>
