@@ -150,17 +150,17 @@
   .nav-brand:hover { opacity: 0.6; }
 
   .nav-brand-num {
-    font-family: var(--mono);
-    font-size: 1.15rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--accent);
   }
 
   .nav-brand-sep {
-    width: 1px;
-    height: 14px;
-    background: rgba(26,26,26,0.15);
+    color: var(--accent);
+    opacity: 0.5;
+    font-size: 0.8rem;
     align-self: center;
   }
 
@@ -1419,7 +1419,7 @@
     z-index: 0;
   }
   .hero-content { position: relative; z-index: 1; }
-  .hero-scroll { position: relative; z-index: 1; }
+  .hero-scroll { z-index: 1; }
 
   @media (max-width: 420px) {
     .hero h1 { font-size: 1.5rem; }
@@ -1439,7 +1439,7 @@
 <nav id="nav">
   <a href="#" class="nav-brand">
     <span class="nav-brand-num">2700</span>
-    <span class="nav-brand-sep"></span>
+    <span class="nav-brand-sep">·</span>
     <span class="nav-brand-text">Medical &amp; Dental Admissions</span>
   </a>
   <div class="nav-links" id="navLinks">
