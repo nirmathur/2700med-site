@@ -19,7 +19,7 @@
     --bg-warm: #f4f1eb;
     --ink: #1a1a1a;
     --ink-soft: #3a3a3a;
-    --muted: #8a8578;
+    --muted: #706b60;
     --accent: #b08d4c;
     --accent-soft: rgba(176,141,76,0.1);
     --accent-med: rgba(176,141,76,0.25);
@@ -339,7 +339,7 @@
   .hero-desc {
     font-size: 1.02rem;
     line-height: 1.8;
-    color: var(--muted);
+    color: var(--ink-soft);
     max-width: 540px;
     margin: 0 auto 3rem;
     font-weight: 400;
@@ -453,7 +453,7 @@
 
   .marquee-track {
     display: flex;
-    animation: marquee 55s linear infinite;
+    animation: marquee 66s linear infinite;
     width: max-content;
   }
 
@@ -526,7 +526,7 @@
   .approach-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
+    gap: 2px;
     background: var(--border-dark);
   }
 
@@ -582,8 +582,9 @@
 
   .service-card {
     padding: 2.5rem 2rem;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(26,26,26,0.1);
     border-radius: 16px;
+    min-height: 220px;
     transition: all 0.25s ease-out;
     position: relative;
     overflow: hidden;
@@ -681,9 +682,10 @@
   }
 
   .tutor-point-line {
-    width: 24px;
+    width: 16px;
     height: 1px;
     background: var(--accent);
+    opacity: 0.6;
     margin-top: 0.7rem;
     flex-shrink: 0;
   }
@@ -826,15 +828,16 @@
   }
 
   .ai-point-marker {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
     background: var(--accent-soft);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 0.85rem;
+    font-size: 1.1rem;
+    color: var(--accent);
     color: var(--accent);
   }
 
@@ -854,27 +857,32 @@
   /* ===== GUARANTEE ===== */
   .guarantee {
     border-top: 3px solid var(--accent);
-    background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg) 100%);
+    background: var(--bg-warm);
     padding: 8rem 3rem;
   }
 
   .guarantee-inner {
-    border: 1.5px solid rgba(176,141,76,0.4);
+    border: 2px solid rgba(176,141,76,0.5);
+    background: rgba(176,141,76,0.04);
+    border-radius: 16px;
+    padding: 3.5rem;
     max-width: 660px;
     margin: 0 auto;
     text-align: center;
   }
 
   .guarantee-mark {
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    border: 1.5px solid var(--accent);
+    border: 2px solid var(--accent);
+    background: rgba(176,141,76,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 2rem;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    color: var(--accent);
     color: var(--accent);
   }
 
@@ -907,9 +915,9 @@
     letter-spacing: 0.04em;
     padding: 0.5rem 1.2rem;
     border-radius: 100px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: white;
+    border: 1px solid rgba(176,141,76,0.25);
+    color: var(--ink-soft);
+    background: rgba(176,141,76,0.06);
   }
 
   /* ===== FOUNDER ===== */
@@ -942,8 +950,9 @@
   }
 
   .cred-item {
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     border: 1px solid var(--border-dark);
+    min-width: 140px;
     border-radius: 12px;
     transition: border-color 0.4s;
   }
@@ -1184,9 +1193,9 @@
 
   .final-cta .footnote {
     font-size: 0.73rem;
-    color: var(--muted);
+    color: var(--ink-soft);
     margin-top: 1.5rem;
-    opacity: 0.6;
+    opacity: 0.8;
   }
 
   /* ===== FOOTER ===== */
@@ -1407,7 +1416,6 @@
     .tutor-stats { grid-template-columns: 1fr 1fr; }
     .country-card { padding: 1.5rem 1rem; }
     .eligibility-list { gap: 1rem; }
-    .testimonial-card, section[id="testimonials"] > div > div { padding: 2rem 1.5rem; }
   }
 
   /* Clip layer for hero background elements only */
@@ -1609,11 +1617,11 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
           <div style="padding:1.75rem; border-radius:14px; background:white; border:1px solid var(--border);">
             <div style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Who they are</div>
-            <div style="font-size:0.86rem; color:var(--ink); line-height:1.6;">Medical students and doctors who've been through the admissions process themselves, across multiple countries</div>
+            <div style="font-size:0.86rem; color:var(--ink); line-height:1.6;">Medical students and doctors who've personally been through the admissions process</div>
           </div>
           <div style="padding:1.75rem; border-radius:14px; background:white; border:1px solid var(--border);">
             <div style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">How we match</div>
-            <div style="font-size:0.86rem; color:var(--ink); line-height:1.6;">Based on your skill gaps, target country, learning style, and which areas need the most work</div>
+            <div style="font-size:0.86rem; color:var(--ink); line-height:1.6;">Based on your skill gaps, target country, and learning style</div>
           </div>
           <div style="padding:1.75rem; border-radius:14px; background:white; border:1px solid var(--border);">
             <div style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Continuity</div>
@@ -1688,20 +1696,6 @@
 </section>
 
 <!-- GUARANTEE -->
-<section id="testimonials" style="padding:5rem 2rem; background:var(--bg-warm);">
-  <div style="max-width:800px; margin:0 auto; text-align:center;">
-    <div class="section-eyebrow reveal">Results</div>
-    <div class="section-heading reveal reveal-d1" style="margin-bottom:3rem;">What students say</div>
-    <div class="reveal reveal-d2" style="background:var(--bg); border:1px solid rgba(176,141,76,0.2); border-radius:12px; padding:2.5rem 3rem; text-align:left; position:relative;">
-      <div style="font-size:3rem; color:var(--accent); line-height:1; position:absolute; top:1.5rem; left:2.5rem; opacity:0.4; font-family:'Playfair Display',serif;">"</div>
-      <p style="font-size:1.1rem; line-height:1.8; color:var(--ink-soft); padding-top:1.5rem; font-style:italic;">It helped me build my confidence in speaking as well as help me understand the interview process on a more in depth level. I was also able to recognise patterns in interview questions which helped me in all my interviews.</p>
-      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(176,141,76,0.15);">
-        <div style="font-weight:600; color:var(--ink); font-size:0.9rem; letter-spacing:0.05em;">PAST STUDENT</div>
-        <div style="color:var(--accent); font-size:0.85rem; margin-top:0.25rem;">UCAT 2920 &nbsp;·&nbsp; Offers from every university interviewed at</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="guarantee" id="guarantee">
   <div class="guarantee-inner reveal">
@@ -1740,6 +1734,10 @@
           <div class="cred-item">
             <div class="cred-value">3,000+</div>
             <div class="cred-label">Hours Tutored</div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-value">8</div>
+            <div class="cred-label">Countries Served</div>
           </div>
         </div>
       </div>
@@ -1831,7 +1829,7 @@
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="container">
-    <div class="section-eyebrow reveal" style="text-align:center;">FAQ</div>
+    <div class="section-eyebrow reveal" style="text-align:center; font-size:0.63rem;">FAQ</div>
     <div class="section-heading reveal reveal-d1" style="text-align:center; max-width:500px; margin:0 auto 3rem;">Common questions</div>
     <div class="faq-list">
       <div class="faq-item">
@@ -1853,6 +1851,10 @@
       <div class="faq-item">
         <button class="faq-q">Do you work with international students? <span class="faq-arrow">+</span></button>
         <div class="faq-a"><p>Absolutely. Our students come from the UK, Singapore, Hong Kong, the UAE, India, Europe, and beyond. We understand international curricula (IB, IGCSE, A-levels, AP) and the specific challenges of applying across borders, whether that's a Singapore student targeting the UK, a UK student considering Australia, or anyone navigating multiple systems at once. All sessions are delivered online.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How much does it cost? <span class="faq-arrow">+</span></button>
+        <div class="faq-a"><p>Programmes are tailored to each student's needs, timeline, and goals, so pricing varies. Book a free consultation and we'll give you a transparent, personalised quote with no obligation.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Is the AI platform a chatbot? <span class="faq-arrow">+</span></button>
