@@ -252,6 +252,7 @@
   .hero {
     min-height: 100vh;
     display: flex;
+    overflow-x: clip;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -281,8 +282,8 @@
   /* Floating ambient particles */
   .hero-particle {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     background: var(--accent);
     border-radius: 50%;
     opacity: 0;
@@ -292,8 +293,9 @@
 
   @keyframes float-particle {
     0% { opacity: 0; transform: translateY(0) scale(0); }
-    15% { opacity: 0.25; transform: scale(1); }
-    85% { opacity: 0.15; }
+    15% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 0.4; }
+    85% { opacity: 0.25; }
     100% { opacity: 0; transform: translateY(-300px) scale(0.5); }
   }
 
@@ -1269,10 +1271,13 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: shimmer 4s linear infinite;
-    padding-right: 0.5em;
+    padding-right: 0.15em;
+    padding-bottom: 0.1em;
     padding-left: 0.05em;
     display: inline-block;
     overflow: visible;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
   @keyframes shimmer {
     0% { background-position: 200% center; }
@@ -1971,7 +1976,7 @@
     p.style.top = (50 + Math.random() * 50) + '%';
     p.style.animationDuration = (4 + Math.random() * 6) + 's';
     p.style.animationDelay = (Math.random() * 8) + 's';
-    p.style.width = (2 + Math.random() * 3) + 'px';
+    p.style.width = (3 + Math.random() * 5) + 'px';
     p.style.height = p.style.width;
     const clip = document.getElementById('heroClip'); (clip || hero).appendChild(p);
   }
