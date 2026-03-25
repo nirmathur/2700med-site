@@ -74,7 +74,7 @@
     100% { transform: translate(0); }
   }
   #intro.counting #introNum {
-    animation: intro-pulse 1.8s ease-in-out forwards, intro-glitch 0.15s steps(3) infinite;
+    animation: intro-pulse 2.8s ease-in-out forwards, intro-glitch 0.15s steps(3) infinite;
   }
   #intro.hit #introNum {
     text-shadow: 0 0 80px rgba(176,141,76,0.6), 0 0 160px rgba(176,141,76,0.3);
@@ -1473,7 +1473,7 @@
 
 <!-- INTRO ANIMATION -->
 <div id="intro" style="position:fixed; inset:0; z-index:10000; background:#0f0f0e; display:flex; align-items:center; justify-content:center; pointer-events:none;">
-  <div id="introNum" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(6rem,20vw,14rem); font-weight:600; color:#b08d4c; letter-spacing:0.02em; opacity:0; will-change:transform,opacity;">0</div>
+  <div id="introNum" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(6rem,20vw,14rem); font-weight:600; color:rgba(100,140,255,0.9); letter-spacing:0.02em; opacity:0; will-change:transform,opacity;">0</div>
 </div>
 
 <div class="cursor" id="cursor"></div>
@@ -2137,7 +2137,7 @@
     
     // Phase 1: Fade in + count 0→2700 with stepped (spider-verse) timing
     const target = 2700;
-    const countDuration = 1800;
+    const countDuration = 2800;
     let startTime = null;
     
     // Show number
