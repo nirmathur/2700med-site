@@ -1467,6 +1467,43 @@
   @media (max-width: 375px) {
     .hero h1 { font-size: 1.35rem; }
   }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+    z-index: 999;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .back-to-top:hover {
+    background: var(--accent-light, #d4b56a);
+    transform: translateY(-2px);
+  }
+  @media (max-width: 768px) {
+    .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 40px; height: 40px; }
+  }
+
 </style>
 </head>
 <body>
@@ -2226,6 +2263,19 @@
     });  // document.fonts.ready
   })();
 
+  
+  // Back to top button
+  (function() {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
   // Animate hero bg number counting up to 2700
   (function() {
     const el = document.getElementById('heroBg');
@@ -2245,5 +2295,7 @@
   })();
 
 </script>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
 </body>
 </html>
