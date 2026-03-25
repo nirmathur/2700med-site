@@ -55,6 +55,31 @@
   }
 
 
+
+  /* ===== INTRO ANIMATION ===== */
+  @keyframes intro-pulse {
+    0%, 100% { text-shadow: 0 0 0 transparent; }
+    50% { text-shadow: 0 0 60px rgba(176,141,76,0.3), 0 0 120px rgba(176,141,76,0.1); }
+  }
+  @keyframes intro-glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, -2px); }
+    80% { transform: translate(1px, 2px); }
+    100% { transform: translate(0); }
+  }
+  #intro.counting #introNum {
+    animation: intro-pulse 0.4s ease-in-out infinite, intro-glitch 0.15s steps(3) infinite;
+  }
+  #intro.hit #introNum {
+    text-shadow: 0 0 80px rgba(176,141,76,0.6), 0 0 160px rgba(176,141,76,0.3);
+  }
+  body.intro-active { overflow: hidden; }
+  body.intro-active nav, body.intro-active .hero, body.intro-active .hero ~ * {
+    opacity: 0;
+  }
+
   /* ===== CUSTOM CURSOR ===== */
   .cursor {
     position: fixed;
@@ -1442,6 +1467,11 @@
 </head>
 <body>
 
+<!-- INTRO ANIMATION -->
+<div id="intro" style="position:fixed; inset:0; z-index:10000; background:#0f0f0e; display:flex; align-items:center; justify-content:center; pointer-events:none;">
+  <div id="introNum" style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(6rem,20vw,14rem); font-weight:600; color:#b08d4c; letter-spacing:0.02em; opacity:0; will-change:transform,opacity;">0</div>
+</div>
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -2090,6 +2120,98 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  
+  // ===== INTRO ANIMATION =====
+  (function() {
+    const intro = document.getElementById('intro');
+    const num = document.getElementById('introNum');
+    const navNum = document.querySelector('.nav-brand-num');
+    if (!intro || !num) return;
+
+    document.body.classList.add('intro-active');
+    
+    // Phase 1: Fade in + count 0→2700 with stepped (spider-verse) timing
+    const target = 2700;
+    const countDuration = 1800;
+    let startTime = null;
+    
+    // Show number
+    setTimeout(() => {
+      num.style.opacity = '1';
+      num.style.transition = 'opacity 0.15s steps(4)';
+      intro.classList.add('counting');
+      
+      // Stepped counter — updates every ~50ms for choppy feel
+      const stepInterval = 50;
+      let current = 0;
+      const increment = Math.ceil(target / (countDuration / stepInterval));
+      
+      const counter = setInterval(() => {
+        current += increment + Math.floor(Math.random() * 20 - 10); // slight randomness
+        if (current >= target) {
+          current = target;
+          clearInterval(counter);
+          
+          // Phase 2: Hit 2700 — flash + hold
+          intro.classList.remove('counting');
+          intro.classList.add('hit');
+          num.style.transform = 'scale(1.08)';
+          num.style.transition = 'transform 0.1s steps(2)';
+          
+          setTimeout(() => {
+            num.style.transform = 'scale(1)';
+            num.style.transition = 'transform 0.08s steps(2)';
+          }, 100);
+          
+          // Phase 3: Fly to nav position
+          setTimeout(() => {
+            const navRect = navNum.getBoundingClientRect();
+            const numRect = num.getBoundingClientRect();
+            
+            const scaleX = navRect.width / numRect.width;
+            const scaleY = navRect.height / numRect.height;
+            const scale = Math.min(scaleX, scaleY);
+            
+            const dx = navRect.left + navRect.width/2 - (numRect.left + numRect.width/2);
+            const dy = navRect.top + navRect.height/2 - (numRect.top + numRect.height/2);
+            
+            // Stepped movement — spider-verse style
+            num.style.transition = 'transform 0.5s steps(8), opacity 0.3s steps(4)';
+            num.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+            
+            // Fade out intro bg
+            intro.style.transition = 'background 0.4s steps(6)';
+            intro.style.background = 'transparent';
+            
+            setTimeout(() => {
+              num.style.opacity = '0';
+              
+              // Phase 4: Reveal page
+              document.body.classList.remove('intro-active');
+              document.querySelector('nav').style.transition = 'opacity 0.4s ease-out';
+              document.querySelector('nav').style.opacity = '1';
+              document.querySelector('.hero').style.transition = 'opacity 0.5s ease-out 0.1s';
+              document.querySelector('.hero').style.opacity = '1';
+              
+              // Remove all siblings
+              document.querySelectorAll('.hero ~ *').forEach(el => {
+                el.style.opacity = '1';
+              });
+              
+              // Cleanup
+              setTimeout(() => {
+                intro.remove();
+                document.body.style.overflow = '';
+              }, 600);
+            }, 400);
+          }, 400);
+        }
+        num.textContent = current;
+      }, stepInterval);
+      
+    }, 300);
+  })();
 
   // Animate hero bg number counting up to 2700
   (function() {
