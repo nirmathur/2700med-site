@@ -1484,6 +1484,9 @@
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    line-height: 1;
+    padding: 0;
+    text-align: center;
     opacity: 0;
     transform: translateY(10px);
     pointer-events: none;
@@ -1937,7 +1940,7 @@
 </section>
 
 <!-- FINAL CTA -->
-<section class="final-cta" id="start">
+<section class="final-cta" id="start" data-cta="true">
   <div class="container reveal">
     <h2>Ready to begin your<br>path to <em>medicine or dentistry</em>?</h2>
     <p>Tell us where you are and where you want to go. We'll be in touch within 48 hours.</p>
@@ -2264,13 +2267,15 @@
   })();
 
   
-  // Back to top button
+  // Back to top button — only visible near bottom CTA section
   (function() {
     const btn = document.getElementById('backToTop');
-    if (!btn) return;
-    window.addEventListener('scroll', () => {
-      btn.classList.toggle('visible', window.scrollY > 600);
-    }, { passive: true });
+    const cta = document.querySelector('[data-cta]');
+    if (!btn || !cta) return;
+    const observer = new IntersectionObserver((entries) => {
+      btn.classList.toggle('visible', entries[0].isIntersecting);
+    }, { threshold: 0.2 });
+    observer.observe(cta);
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
