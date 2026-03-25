@@ -58,8 +58,12 @@
 
   /* ===== INTRO ANIMATION ===== */
   @keyframes intro-pulse {
-    0%, 100% { text-shadow: 0 0 0 transparent; }
-    50% { text-shadow: 0 0 60px rgba(176,141,76,0.3), 0 0 120px rgba(176,141,76,0.1); }
+    0% { text-shadow: 0 0 60px rgba(100,140,255,0.4), 0 0 120px rgba(100,140,255,0.15); color: rgba(100,140,255,0.9); }
+    20% { text-shadow: 0 0 60px rgba(200,80,200,0.4), 0 0 120px rgba(200,80,200,0.15); color: rgba(200,80,200,0.9); }
+    40% { text-shadow: 0 0 60px rgba(255,120,80,0.4), 0 0 120px rgba(255,120,80,0.15); color: rgba(255,120,80,0.9); }
+    60% { text-shadow: 0 0 60px rgba(80,220,180,0.4), 0 0 120px rgba(80,220,180,0.15); color: rgba(80,220,180,0.9); }
+    80% { text-shadow: 0 0 60px rgba(176,141,76,0.4), 0 0 120px rgba(176,141,76,0.15); color: rgba(176,141,76,0.95); }
+    100% { text-shadow: 0 0 60px rgba(176,141,76,0.3), 0 0 120px rgba(176,141,76,0.1); color: #b08d4c; }
   }
   @keyframes intro-glitch {
     0% { transform: translate(0); }
@@ -70,7 +74,7 @@
     100% { transform: translate(0); }
   }
   #intro.counting #introNum {
-    animation: intro-pulse 0.4s ease-in-out infinite, intro-glitch 0.15s steps(3) infinite;
+    animation: intro-pulse 1.8s ease-in-out forwards, intro-glitch 0.15s steps(3) infinite;
   }
   #intro.hit #introNum {
     text-shadow: 0 0 80px rgba(176,141,76,0.6), 0 0 160px rgba(176,141,76,0.3);
@@ -2142,16 +2146,21 @@
       num.style.transition = 'opacity 0.15s steps(4)';
       intro.classList.add('counting');
       
-      // Stepped counter — updates every ~50ms for choppy feel
-      const stepInterval = 50;
-      let current = 0;
-      const increment = Math.ceil(target / (countDuration / stepInterval));
+      // Smooth counter with easeOut
+      let counterStart = performance.now();
+      function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
       
-      const counter = setInterval(() => {
-        current += increment + Math.floor(Math.random() * 20 - 10); // slight randomness
-        if (current >= target) {
-          current = target;
-          clearInterval(counter);
+      function countStep(now) {
+        const elapsed = now - counterStart;
+        const progress = Math.min(elapsed / countDuration, 1);
+        const current = Math.round(easeOutExpo(progress) * target);
+        num.textContent = current;
+        
+        if (progress < 1) {
+          requestAnimationFrame(countStep);
+          return;
+        }
+        // Count complete
           
           // Phase 2: Hit 2700 — flash + hold
           intro.classList.remove('counting');
@@ -2177,11 +2186,11 @@
             const dy = navRect.top + navRect.height/2 - (numRect.top + numRect.height/2);
             
             // Stepped movement — spider-verse style
-            num.style.transition = 'transform 0.5s steps(8), opacity 0.3s steps(4)';
+            num.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out';
             num.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
             
             // Fade out intro bg
-            intro.style.transition = 'background 0.4s steps(6)';
+            intro.style.transition = 'background 0.5s ease-out';
             intro.style.background = 'transparent';
             
             setTimeout(() => {
@@ -2207,8 +2216,7 @@
             }, 400);
           }, 400);
         }
-        num.textContent = current;
-      }, stepInterval);
+      requestAnimationFrame(countStep);
       
     }, 300);
   })();
