@@ -74,7 +74,7 @@
     100% { transform: translate(0); }
   }
   #intro.counting #introNum {
-    animation: intro-pulse 2.8s ease-in-out forwards, intro-glitch 0.15s steps(3) infinite;
+    animation: intro-pulse 3.5s ease-in-out forwards, intro-glitch 0.15s steps(3) infinite;
   }
   #intro.hit #introNum {
     text-shadow: 0 0 80px rgba(176,141,76,0.6), 0 0 160px rgba(176,141,76,0.3);
@@ -2137,23 +2137,28 @@
     
     // Phase 1: Fade in + count 0→2700 with stepped (spider-verse) timing
     const target = 2700;
-    const countDuration = 2800;
+    const countDuration = 3500;
     let startTime = null;
     
-    // Show number
-    setTimeout(() => {
+    // Wait for fonts to load, then start
+    document.fonts.ready.then(() => {
+      // Brief pause so "0" is visible
+      setTimeout(() => {
       num.style.opacity = '1';
-      num.style.transition = 'opacity 0.15s steps(4)';
+      num.style.transition = 'opacity 0.3s ease-out';
+      
+      // Hold on 0 for a beat before counting
+      setTimeout(() => {
       intro.classList.add('counting');
       
       // Smooth counter with easeOut
       let counterStart = performance.now();
-      function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
       
       function countStep(now) {
         const elapsed = now - counterStart;
         const progress = Math.min(elapsed / countDuration, 1);
-        const current = Math.round(easeOutExpo(progress) * target);
+        const current = Math.round(easeOutCubic(progress) * target);
         num.textContent = current;
         
         if (progress < 1) {
@@ -2218,7 +2223,9 @@
         }
       requestAnimationFrame(countStep);
       
-    }, 300);
+    }, 600);  // hold on 0 for 600ms
+    }, 200);  // pause after font load
+    });  // document.fonts.ready
   })();
 
   // Animate hero bg number counting up to 2700
