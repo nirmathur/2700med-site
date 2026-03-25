@@ -2064,7 +2064,7 @@
       if (entry.isIntersecting) {
         const el = entry.target;
         const text = el.textContent;
-        const num = parseInt(text);
+        const num = parseInt(text.replace(/,/g, ''));
         if (!isNaN(num) && num > 0 && num <= 10000) {
           let current = 0;
           const increment = Math.ceil(num / 40);
