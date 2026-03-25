@@ -80,7 +80,7 @@
     text-shadow: 0 0 80px rgba(176,141,76,0.6), 0 0 160px rgba(176,141,76,0.3);
   }
   body.intro-active { overflow: hidden; }
-  body.intro-active nav, body.intro-active .hero, body.intro-active .hero ~ * {
+  body.intro-active nav, body.intro-active .hero, body.intro-active .hero ~ *:not(.back-to-top) {
     opacity: 0;
   }
 
@@ -2247,7 +2247,7 @@
             
             document.querySelector('.hero').style.transition = 'opacity 0.5s ease-out 0.2s';
             document.querySelector('.hero').style.opacity = '1';
-            document.querySelectorAll('.hero ~ *').forEach(el => {
+            document.querySelectorAll('.hero ~ *:not(.back-to-top)').forEach(el => {
               el.style.transition = 'opacity 0.4s ease-out 0.3s';
               el.style.opacity = '1';
             });
@@ -2267,16 +2267,21 @@
   })();
 
   
-  // Back to top button — only visible near bottom CTA section
+  // Back to top button — appears after scrolling past 60% of page
   (function() {
-    const btn = document.getElementById('backToTop');
-    const cta = document.querySelector('[data-cta]');
-    if (!btn || !cta) return;
-    const observer = new IntersectionObserver((entries) => {
-      btn.classList.toggle('visible', entries[0].isIntersecting);
-    }, { threshold: 0.2 });
-    observer.observe(cta);
-    btn.addEventListener('click', () => {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+      var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPct > 0.6) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   })();
@@ -2301,6 +2306,6 @@
 
 </script>
 
-<button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L3 8h3v6h4V8h3L8 2z" fill="currentColor"/></svg></button>
 </body>
 </html>
