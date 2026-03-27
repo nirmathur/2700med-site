@@ -489,8 +489,8 @@
   .marquee-item {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 0 2rem;
+    gap: 3rem;
+    padding: 0 3rem;
     white-space: nowrap;
   }
 
@@ -1009,6 +1009,7 @@
   .global-section {
     background: var(--bg-warm);
     text-align: center;
+    overflow-x: hidden;
   }
 
   .global-section .section-heading {
@@ -1433,7 +1434,7 @@
     .final-cta { padding: 6rem 1.5rem; }
     footer { padding: 2rem 1.5rem; }
     .founder-creds { grid-template-columns: 1fr; }
-    .global-grid { grid-template-columns: 1fr 1fr; max-width: 380px; margin: 0 auto; }
+    .global-grid { grid-template-columns: 1fr 1fr; max-width: 100%; width: 100%; margin: 0 auto; padding: 0; }
     .tutor-visual { grid-template-columns: 1fr; }
     .tutor-stat-card.span-2 { grid-column: span 1; }
   }
@@ -1826,7 +1827,7 @@
     <div class="section-eyebrow reveal">Where Our Students Come From</div>
     <div class="section-heading reveal reveal-d1">Local students, international<br>students, going anywhere</div>
     <p class="section-body reveal reveal-d2">We work with students applying from and to medical and dental schools across the world. Whether you're in London applying locally, in Singapore targeting the UK, or in the UAE deciding between three continents, we've guided students through every combination.</p>
-    <div class="global-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="global-grid">
       <div class="global-card reveal">
         <div class="global-flag">🇬🇧</div>
         <h4>United Kingdom</h4>
