@@ -490,8 +490,8 @@
   .marquee-item {
     display: flex;
     align-items: center;
-    gap: 3rem;
-    padding: 0 3rem;
+    gap: 2rem;
+    padding: 0 2rem;
     white-space: nowrap;
   }
 
@@ -2214,6 +2214,7 @@
           // Phase 2: Hit 2700 — flash + hold
           intro.classList.remove('counting');
           intro.classList.add('hit');
+          num.style.color = '#b08d4c';
           num.style.transform = 'scale(1.08)';
           num.style.transition = 'transform 0.1s steps(2)';
           
